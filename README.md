@@ -65,7 +65,7 @@ Les secrets Render pointent vers Neon **production** ; le seed n'y est jamais ex
 
 ## Contribution
 
-Créer une branche `feature/*`, `fix/*`, `chore/*`, `docs/*` ou `refactor/*` depuis `dev`, puis ouvrir une pull request vers `dev`. Les mises en production passent par une pull request de `dev` vers `main`.
+Créer une branche `feature/*`, `fix/*`, `chore/*`, `docs/*` ou `refactor/*` depuis `dev`, puis ouvrir une pull request vers `dev`. Les mises en production passent par une pull request de `dev` vers `main`, fusionnée avec « Create a merge commit » pour conserver l'historique commun des branches (sans squash ni rebase sur les releases).
 
 Les pushes directs, force pushes et suppressions de `dev` et `main` sont interdits. Les pull requests doivent provenir de ce dépôt.
 
