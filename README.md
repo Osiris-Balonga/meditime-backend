@@ -43,7 +43,7 @@ Pour changer le schéma, se coordonner avec le responsable des migrations, puis 
 | 2 | `feature/doctors-availability` | #6 recherche, #7 horaires, #8 exceptions |
 | 3 | `feature/appointments-dashboard` | #9 demandes, #10 décisions, #11 tableaux de bord |
 
-La personne 3 coordonne aussi les migrations et l'intégration frontend (#12), avec les deux autres. Valider ensemble les formats des endpoints avant de commencer. Chaque PR reste limitée à une issue.
+La personne 3 coordonne aussi les migrations et l'intégration frontend (#12), avec les deux autres. Valider ensemble les formats des endpoints avant de commencer. Chaque PR référence ses issues et reste limitée à un module cohérent.
 
 Un profil médecin ne donne des droits que s'il est approuvé. Les dates des créneaux sont stockées en UTC ; les horaires hebdomadaires utilisent le fuseau du médecin et les jours 1=lundi à 7=dimanche. Plusieurs demandes peuvent être en attente sur un créneau ; une seule peut être confirmée. Les index SQL garantissent cette unicité ; les décisions et modifications du planning doivent utiliser une transaction. Les enums Prisma sont en majuscules, à convertir en statuts minuscules dans l'API. « Passé » se déduit de la date.
 
