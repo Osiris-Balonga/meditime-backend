@@ -1,0 +1,165 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum RequestStatus {
+  PENDING   @map("pending")
+  CONFIRMED @map("confirmed")
+  DECLINED  @map("declined")
+  CANCELLED @map("cancelled")
+}
+
+enum SlotStatus {
+  AVAILABLE @map("available")
+  BLOCKED   @map("blocked")
+}
+
+enum ExceptionType {
+  BLOCK_DAY
+  BLOCK_INTERVAL
+  ADD_INTERVAL
+}
+
+model User {
+  id                 String               @id @default(uuid()) @db.Uuid
+  email              String               @unique
+  firstName          String?
+  lastName           String?
+  phone              String?
+  avatarUrl          String?
+  profileCompletedAt DateTime?            @db.Timestamptz(3)
+  createdAt          DateTime             @default(now()) @db.Timestamptz(3)
+  updatedAt          DateTime             @updatedAt @db.Timestamptz(3)
+  identities         AuthIdentity[]
+  sessions           Session[]
+  doctorProfile      DoctorProfile?
+  requests           AppointmentRequest[]
+}
+
+model AuthIdentity {
+  id              String   @id @default(uuid()) @db.Uuid
+  userId          String   @db.Uuid
+  provider        String
+  providerSubject String
+  createdAt       DateTime @default(now()) @db.Timestamptz(3)
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerSubject])
+  @@index([userId])
+}
+
+model EmailChallenge {
+  id         String    @id @default(uuid()) @db.Uuid
+  email      String
+  codeHash   String
+  attempts   Int       @default(0)
+  expiresAt  DateTime  @db.Timestamptz(3)
+  consumedAt DateTime? @db.Timestamptz(3)
+  createdAt  DateTime  @default(now()) @db.Timestamptz(3)
+
+  @@index([email, createdAt])
+}
+
+model Session {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @db.Uuid
+  tokenHash String    @unique
+  expiresAt DateTime  @db.Timestamptz(3)
+  revokedAt DateTime? @db.Timestamptz(3)
+  createdAt DateTime  @default(now()) @db.Timestamptz(3)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model Specialty {
+  id      String          @id @default(uuid()) @db.Uuid
+  slug    String          @unique
+  name    String
+  doctors DoctorProfile[]
+}
+
+model DoctorProfile {
+  id                  String                  @id @default(uuid()) @db.Uuid
+  userId              String                  @unique @db.Uuid
+  specialtyId         String                  @db.Uuid
+  practiceName        String
+  address             String
+  city                String
+  postalCode          String?
+  timezone            String                  @default("Africa/Brazzaville")
+  consultationMinutes Int                     @default(30)
+  isApproved          Boolean                 @default(false)
+  published           Boolean                 @default(false)
+  createdAt           DateTime                @default(now()) @db.Timestamptz(3)
+  updatedAt           DateTime                @updatedAt @db.Timestamptz(3)
+  user                User                    @relation(fields: [userId], references: [id], onDelete: Restrict)
+  specialty           Specialty               @relation(fields: [specialtyId], references: [id], onDelete: Restrict)
+  weeklyAvailability  WeeklyAvailability[]
+  exceptions          AvailabilityException[]
+  slots               Slot[]
+
+  @@index([specialtyId, city])
+}
+
+model WeeklyAvailability {
+  id          String        @id @default(uuid()) @db.Uuid
+  doctorId    String        @db.Uuid
+  weekday     Int
+  startMinute Int
+  endMinute   Int
+  doctor      DoctorProfile @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+
+  @@unique([doctorId, weekday, startMinute])
+}
+
+model AvailabilityException {
+  id                  String        @id @default(uuid()) @db.Uuid
+  doctorId            String        @db.Uuid
+  date                DateTime      @db.Date
+  type                ExceptionType
+  startMinute         Int?
+  endMinute           Int?
+  consultationMinutes Int?
+  createdAt           DateTime      @default(now()) @db.Timestamptz(3)
+  doctor              DoctorProfile @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+
+  @@index([doctorId, date])
+}
+
+model Slot {
+  id        String               @id @default(uuid()) @db.Uuid
+  doctorId  String               @db.Uuid
+  startsAt  DateTime             @db.Timestamptz(3)
+  endsAt    DateTime             @db.Timestamptz(3)
+  status    SlotStatus           @default(AVAILABLE)
+  source    String               @default("weekly")
+  createdAt DateTime             @default(now()) @db.Timestamptz(3)
+  doctor    DoctorProfile        @relation(fields: [doctorId], references: [id], onDelete: Restrict)
+  requests  AppointmentRequest[]
+
+  @@unique([doctorId, startsAt])
+  @@index([doctorId, startsAt, status])
+}
+
+model AppointmentRequest {
+  id           String        @id @default(uuid()) @db.Uuid
+  slotId       String        @db.Uuid
+  patientId    String        @db.Uuid
+  status       RequestStatus @default(PENDING)
+  reason       String?       @db.VarChar(1000)
+  decisionCode String?
+  decidedAt    DateTime?     @db.Timestamptz(3)
+  createdAt    DateTime      @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime      @updatedAt @db.Timestamptz(3)
+  slot         Slot          @relation(fields: [slotId], references: [id], onDelete: Restrict)
+  patient      User          @relation(fields: [patientId], references: [id], onDelete: Restrict)
+
+  @@index([patientId, status])
+  @@index([slotId, status])
+}
