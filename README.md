@@ -65,6 +65,8 @@ Les secrets Render pointent vers Neon **production** ; le seed n'y est jamais ex
 
 ## Contribution
 
+Suivi des tâches : [Kanban MediTime](https://github.com/users/Osiris-Balonga/projects/5/views/1). Jonathan prend #6–8 ; #9–11 restent à attribuer.
+
 Créer une branche `feature/*`, `fix/*`, `chore/*`, `docs/*` ou `refactor/*` depuis `dev`, puis ouvrir une pull request vers `dev`. Les mises en production passent par une pull request de `dev` vers `main`, fusionnée avec « Create a merge commit » pour conserver l'historique commun des branches (sans squash ni rebase sur les releases).
 
 Les pushes directs, force pushes et suppressions de `dev` et `main` sont interdits. Les pull requests doivent provenir de ce dépôt.
@@ -72,3 +74,19 @@ Les pushes directs, force pushes et suppressions de `dev` et `main` sont interdi
 Chaque issue précise le travail attendu et ses critères de recette manuelle. La validation se fait par lancement local, requêtes HTTP et parcours utilisateur, sans suite de tests automatisés.
 
 Ne jamais ajouter de secrets ou de données de patients réels. Les fichiers `.env` restent locaux ; les données de démonstration sont fictives.
+
+## Connexion et profils
+
+Renseigner `SESSION_SECRET` (aléatoire, au moins 32 caractères), `EMAIL_API_KEY` (Resend) et `EMAIL_FROM` (expéditeur autorisé). Pour Google, créer un client OAuth Web, autoriser les origines du frontend et partager son client ID entre le frontend et `GOOGLE_CLIENT_ID` de l'API. Aucune clé secrète Google n'est nécessaire pour la vérification du jeton. Sans ces paramètres, la fonctionnalité concernée répond 503 ; `/health` et `/ready` restent disponibles.
+
+Les endpoints et les règles d'intégration sont dans [docs/auth.md](docs/auth.md). Les requêtes frontend utilisent `credentials: 'include'`. Après connexion, conserver `csrfToken` retourné et l'envoyer dans `X-CSRF-Token` sur les écritures authentifiées ; `GET /api/v1/me` permet de le récupérer après rechargement. Envoyer un corps JSON, y compris `{}` pour la déconnexion.
+
+Pour les autres modules, importer `requireSession`, `requireDoctor` et `requireCsrf` depuis `src/middlewares/auth.js`. Les identifiants autorisés sont `req.auth.userId` et `req.auth.doctorId`, jamais ceux du corps JSON. `lockDoctor(tx, doctorId)` fournit le verrou commun à utiliser dans les mutations de planning et de demandes.
+
+L'habilitation médecin est interne, dans la base configurée :
+
+```sh
+npm run doctor:approve -- --email "medecin@example.test" --specialty "medecine-generale" --practice "Cabinet Démo" --address "Adresse fictive" --city "Brazzaville"
+```
+
+Le compte doit déjà exister avec son profil complété. En production, les cookies sont `Secure`, `HttpOnly`, `SameSite=None` par défaut ; en local `SameSite=Lax`. Certains navigateurs bloquent les cookies tiers : vérifier les domaines réels lors de #12 et privilégier des domaines frontend/API du même site. Le seed ne permet pas une connexion : ses adresses fictives ne reçoivent pas d'email.
