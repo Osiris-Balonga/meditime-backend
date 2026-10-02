@@ -49,6 +49,8 @@ Un profil médecin ne donne des droits que s'il est approuvé. Les dates des cr�
 
 ## Déploiement
 
+API : https://meditime-backend-is6p.onrender.com ; connexion DB : [/ready](https://meditime-backend-is6p.onrender.com/ready).
+
 Render déploie uniquement `main`, en région Frankfurt. Build : `npm ci && npm run build && npm run db:deploy` ; démarrage : `npm start`. Le fichier `render.yaml` décrit la configuration. La migration s'exécute au build sur l'offre gratuite.
 
 Les secrets Render pointent vers Neon **production** ; le seed n'y est jamais exécuté. Après déploiement, vérifier `/ready`. Ajouter l'origine du frontend déployé à `FRONTEND_ORIGINS` lors de l'intégration. Les paramètres Google et email seront renseignés avec les modules d'authentification.
