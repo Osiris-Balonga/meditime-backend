@@ -49,6 +49,8 @@ Un profil médecin ne donne des droits que s'il est approuvé. Les dates des cr�
 
 ## Déploiement
 
+API : https://meditime-backend-is6p.onrender.com ; connexion DB : [/ready](https://meditime-backend-is6p.onrender.com/ready).
+
 Render déploie uniquement `main`, en région Frankfurt. Build : `npm ci && npm run build && npm run db:deploy` ; démarrage : `npm start`. Le fichier `render.yaml` décrit la configuration. La migration s'exécute au build sur l'offre gratuite.
 
 Les secrets Render pointent vers Neon **production** ; le seed n'y est jamais exécuté. Après déploiement, vérifier `/ready`. Ajouter l'origine du frontend déployé à `FRONTEND_ORIGINS` lors de l'intégration. Les paramètres Google et email seront renseignés avec les modules d'authentification.
@@ -63,7 +65,7 @@ Les secrets Render pointent vers Neon **production** ; le seed n'y est jamais ex
 
 ## Contribution
 
-Créer une branche `feature/*`, `fix/*`, `chore/*`, `docs/*` ou `refactor/*` depuis `dev`, puis ouvrir une pull request vers `dev`. Les mises en production passent par une pull request de `dev` vers `main`.
+Créer une branche `feature/*`, `fix/*`, `chore/*`, `docs/*` ou `refactor/*` depuis `dev`, puis ouvrir une pull request vers `dev`. Les mises en production passent par une pull request de `dev` vers `main`, fusionnée avec « Create a merge commit » pour conserver l'historique commun des branches (sans squash ni rebase sur les releases).
 
 Les pushes directs, force pushes et suppressions de `dev` et `main` sont interdits. Les pull requests doivent provenir de ce dépôt.
 
