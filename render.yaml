@@ -21,3 +21,11 @@ services:
         sync: false
       - key: FRONTEND_ORIGINS
         value: http://localhost:5173,http://localhost:3000
+      - key: SESSION_SECRET
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: EMAIL_API_KEY
+        sync: false
+      - key: EMAIL_FROM
+        sync: false

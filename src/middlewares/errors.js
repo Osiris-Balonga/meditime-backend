@@ -1,3 +1,5 @@
+import { ZodError } from 'zod';
+
 export class HttpError extends Error {
   constructor(statusCode, code, message) {
     super(message);
@@ -12,6 +14,10 @@ export function notFound(req, res) {
 
 export function errorHandler(error, req, res, next) {
   if (res.headersSent) return next(error);
+  if (error instanceof ZodError) {
+    const fields = [...new Set(error.issues.map((issue) => issue.path.join('.') || 'body'))];
+    return res.status(400).json({ error: { code: 'INVALID_INPUT', message: 'Vérifiez les champs envoyés.', fields } });
+  }
   if (error.type === 'entity.parse.failed') {
     return res.status(400).json({ error: { code: 'INVALID_JSON', message: 'Le corps JSON est invalide.' } });
   }
