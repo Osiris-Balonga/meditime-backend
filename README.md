@@ -6,7 +6,7 @@ API de gestion des disponibilités des médecins et des demandes de rendez-vous.
 
 Node.js, Express, Prisma ORM et PostgreSQL sur Neon. Le backend sera déployé sur Render.
 
-Le socle Express, le client Prisma, les migrations et les données fictives sont disponibles. Les routes métier restent à implémenter dans les issues.
+Le socle Express, Prisma, les migrations, les données fictives et l'authentification avec profils sont disponibles. L'annuaire, le planning et les rendez-vous restent à implémenter dans les issues.
 
 ## Démarrer
 
@@ -65,7 +65,7 @@ Les secrets Render pointent vers Neon **production** ; le seed n'y est jamais ex
 
 ## Contribution
 
-Suivi des tâches : [Kanban MediTime](https://github.com/users/Osiris-Balonga/projects/5/views/1). Jonathan prend #6–8 ; #9–11 restent à attribuer.
+Suivi des tâches et affectations : [Kanban MediTime](https://github.com/users/Osiris-Balonga/projects/5/views/1).
 
 Créer une branche `feature/*`, `fix/*`, `chore/*`, `docs/*` ou `refactor/*` depuis `dev`, puis ouvrir une pull request vers `dev`. Les mises en production passent par une pull request de `dev` vers `main`, fusionnée avec « Create a merge commit » pour conserver l'historique commun des branches (sans squash ni rebase sur les releases).
 
@@ -78,6 +78,8 @@ Ne jamais ajouter de secrets ou de données de patients réels. Les fichiers `.e
 ## Connexion et profils
 
 Renseigner `SESSION_SECRET` (aléatoire, au moins 32 caractères), `EMAIL_API_KEY` (Resend) et `EMAIL_FROM` (expéditeur autorisé). Pour Google, créer un client OAuth Web, autoriser les origines du frontend et partager son client ID entre le frontend et `GOOGLE_CLIENT_ID` de l'API. Aucune clé secrète Google n'est nécessaire pour la vérification du jeton. Sans ces paramètres, la fonctionnalité concernée répond 503 ; `/health` et `/ready` restent disponibles.
+
+Le parcours Google utilise le popup de Google Identity Services, puis envoie `credential` en JSON à l'API. Il ne nécessite pas de callback ni d'URI de redirection backend. Autoriser les origines locales `http://localhost`, `http://localhost:5173` et `http://localhost:3000`, puis l'origine exacte du frontend déployé. Avec `MediTime <onboarding@resend.dev>`, Resend permet uniquement la démonstration vers l'adresse du compte ; valider un domaine et changer `EMAIL_FROM` pour les autres utilisateurs.
 
 Les endpoints et les règles d'intégration sont dans [docs/auth.md](docs/auth.md). Les requêtes frontend utilisent `credentials: 'include'`. Après connexion, conserver `csrfToken` retourné et l'envoyer dans `X-CSRF-Token` sur les écritures authentifiées ; `GET /api/v1/me` permet de le récupérer après rechargement. Envoyer un corps JSON, y compris `{}` pour la déconnexion.
 
