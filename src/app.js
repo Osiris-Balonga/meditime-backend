@@ -6,6 +6,7 @@ import { env } from './config/env.js';
 import { prisma } from './lib/prisma.js';
 import routes from './routes/index.js';
 import { errorHandler, notFound } from './middlewares/errors.js';
+import { guardApiWrites } from './middlewares/request-security.js';
 
 export const app = express();
 app.disable('x-powered-by');
@@ -32,6 +33,6 @@ app.get('/ready', async (req, res) => {
   }
 });
 
-app.use('/api/v1', routes);
+app.use('/api/v1', (req, res, next) => { res.set('Cache-Control', 'no-store'); next(); }, guardApiWrites, routes);
 app.use(notFound);
 app.use(errorHandler);
