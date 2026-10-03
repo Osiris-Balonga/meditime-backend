@@ -1,0 +1,126 @@
+{
+  "results": [
+    {
+      "id": "per_6aa88eb3239894e2a02fb44a",
+      "gender": "female",
+      "name": {
+        "first": "Simone",
+        "last": "Adoua",
+        "full": "Simone Adoua"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1959-08-25",
+        "age": 67,
+        "ageGroup": "senior"
+      },
+      "location": {
+        "street": "84, Avenue Théophile Okoula",
+        "city": "Pointe-Noire",
+        "state": "Pointe-Noire",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.77609,
+          "longitude": 11.86352,
+          "precision": "city"
+        },
+        "formatted": "84, Avenue Théophile Okoula\nPointe-Noire"
+      },
+      "email": "s.adoua.ubx00@example.test",
+      "phone": "+242061276109",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0546.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0546.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0546.webp"
+      }
+    },
+    {
+      "id": "per_43810738dedef7076c7d7891",
+      "gender": "female",
+      "name": {
+        "first": "Jeanne",
+        "last": "Ngoto",
+        "full": "Jeanne Ngoto"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1947-02-18",
+        "age": 79,
+        "ageGroup": "senior"
+      },
+      "location": {
+        "street": "69, Avenue Pascaline Assassa",
+        "city": "Dolisie",
+        "state": "Niari",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.19834,
+          "longitude": 12.66664,
+          "precision": "city"
+        },
+        "formatted": "69, Avenue Pascaline Assassa\nDolisie"
+      },
+      "email": "j.ngoto.ouu01@example.test",
+      "phone": "+242061263275",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0914.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0914.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0914.webp"
+      }
+    },
+    {
+      "id": "per_3e4bef0215f628b341b229a1",
+      "gender": "female",
+      "name": {
+        "first": "Hortense",
+        "last": "Adoua",
+        "full": "Hortense Adoua"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1934-09-19",
+        "age": 92,
+        "ageGroup": "senior"
+      },
+      "location": {
+        "street": "3, Rue Ngoto",
+        "city": "Brazzaville",
+        "state": "Brazzaville",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.26613,
+          "longitude": 15.28318,
+          "precision": "city"
+        },
+        "formatted": "3, Rue Ngoto\nBrazzaville"
+      },
+      "email": "h.adoua.8s402@example.test",
+      "phone": "+242061207534",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0917.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0917.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0917.webp"
+      }
+    }
+  ],
+  "meta": {
+    "count": 3,
+    "asOf": "2026-10-03",
+    "seed": "meditime-patients-senior-female",
+    "dataVersion": "geo-2026-09-26.1",
+    "catalogVersion": "v1",
+    "schemaVersion": "2"
+  }
+}

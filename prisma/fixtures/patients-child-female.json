@@ -1,0 +1,126 @@
+{
+  "results": [
+    {
+      "id": "per_0c80413e1b15cdf7bcad6f3e",
+      "gender": "female",
+      "name": {
+        "first": "Pascaline",
+        "last": "Mahinga",
+        "full": "Pascaline Mahinga"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "2018-05-23",
+        "age": 8,
+        "ageGroup": "child"
+      },
+      "location": {
+        "street": "203, Rue Adoua",
+        "city": "Gamboma",
+        "state": "Plateaux",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -1.87639,
+          "longitude": 15.86444,
+          "precision": "city"
+        },
+        "formatted": "203, Rue Adoua\nGamboma"
+      },
+      "email": "p.mahinga.l3100@example.test",
+      "phone": "+242061230391",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0894.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0894.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0894.webp"
+      }
+    },
+    {
+      "id": "per_165a04abd534a9d24eb340d7",
+      "gender": "female",
+      "name": {
+        "first": "Hortense",
+        "last": "Banvidi",
+        "full": "Hortense Banvidi"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "2017-07-14",
+        "age": 9,
+        "ageGroup": "child"
+      },
+      "location": {
+        "street": "191, Rue Ngoto",
+        "city": "Nkayi",
+        "state": "Bouenza",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.18396,
+          "longitude": 13.2859,
+          "precision": "city"
+        },
+        "formatted": "191, Rue Ngoto\nNkayi"
+      },
+      "email": "h.banvidi.92y01@example.test",
+      "phone": "+242061215366",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0086.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0086.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0086.webp"
+      }
+    },
+    {
+      "id": "per_8c2430cf76e29fe00a55e56c",
+      "gender": "female",
+      "name": {
+        "first": "Charlotte",
+        "last": "Banvidi",
+        "full": "Charlotte Banvidi"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "2016-01-01",
+        "age": 10,
+        "ageGroup": "child"
+      },
+      "location": {
+        "street": "112, Rue Assassa",
+        "city": "Dolisie",
+        "state": "Niari",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.19834,
+          "longitude": 12.66664,
+          "precision": "city"
+        },
+        "formatted": "112, Rue Assassa\nDolisie"
+      },
+      "email": "c.banvidi.itv02@example.test",
+      "phone": "+242061239825",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0895.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0895.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0895.webp"
+      }
+    }
+  ],
+  "meta": {
+    "count": 3,
+    "asOf": "2026-10-03",
+    "seed": "meditime-patients-child-female",
+    "dataVersion": "geo-2026-09-26.1",
+    "catalogVersion": "v1",
+    "schemaVersion": "2"
+  }
+}

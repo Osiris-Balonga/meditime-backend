@@ -1,0 +1,249 @@
+{
+  "results": [
+    {
+      "id": "per_4743504b92ffb13fa6675447",
+      "gender": "male",
+      "name": {
+        "first": "Daniel",
+        "last": "Ngoto",
+        "full": "Daniel Ngoto"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1986-10-27",
+        "age": 39,
+        "ageGroup": "adult"
+      },
+      "location": {
+        "street": "143, Avenue Théophile Mahinga",
+        "city": "Owando",
+        "state": "Cuvette",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -0.48193,
+          "longitude": 15.89988,
+          "precision": "city"
+        },
+        "formatted": "143, Avenue Théophile Mahinga\nOwando"
+      },
+      "email": "d.ngoto.m470e@example.test",
+      "phone": "+242061200477",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0931.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0931.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0931.webp"
+      }
+    },
+    {
+      "id": "per_c238e9973ef47add411ab492",
+      "gender": "male",
+      "name": {
+        "first": "Guillaume",
+        "last": "Adoua",
+        "full": "Guillaume Adoua"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1991-10-21",
+        "age": 34,
+        "ageGroup": "adult"
+      },
+      "location": {
+        "street": "144, Boulevard Daniel Okoula",
+        "city": "Ouesso",
+        "state": "Sangha",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": 1.61361,
+          "longitude": 16.05167,
+          "precision": "city"
+        },
+        "formatted": "144, Boulevard Daniel Okoula\nOuesso"
+      },
+      "email": "g.adoua.3da0g@example.test",
+      "phone": "+242061296581",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0929.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0929.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0929.webp"
+      }
+    },
+    {
+      "id": "per_f8ab892025c9f5283db9b7ff",
+      "gender": "male",
+      "name": {
+        "first": "Michel",
+        "last": "Adoua",
+        "full": "Michel Adoua"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1983-08-03",
+        "age": 43,
+        "ageGroup": "adult"
+      },
+      "location": {
+        "street": "81, Rue Guillaume Ngoto",
+        "city": "Kayes",
+        "state": "Bouenza",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.20493,
+          "longitude": 13.28608,
+          "precision": "city"
+        },
+        "formatted": "81, Rue Guillaume Ngoto\nKayes"
+      },
+      "email": "m.adoua.lq502@example.test",
+      "phone": "+242061235201",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0543.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0543.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0543.webp"
+      }
+    },
+    {
+      "id": "per_b08709bb37598b0536e6a75b",
+      "gender": "male",
+      "name": {
+        "first": "Guillaume",
+        "last": "Mahinga",
+        "full": "Guillaume Mahinga"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1974-11-19",
+        "age": 51,
+        "ageGroup": "adult"
+      },
+      "location": {
+        "street": "199, Boulevard Théophile Adoua",
+        "city": "Brazzaville",
+        "state": "Brazzaville",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.26613,
+          "longitude": 15.28318,
+          "precision": "city"
+        },
+        "formatted": "199, Boulevard Théophile Adoua\nBrazzaville"
+      },
+      "email": "g.mahinga.qm906@example.test",
+      "phone": "+242061206833",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0932.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0932.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0932.webp"
+      }
+    },
+    {
+      "id": "per_949645b152df775d488a0f3d",
+      "gender": "male",
+      "name": {
+        "first": "Daniel",
+        "last": "Okoula",
+        "full": "Daniel Okoula"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1964-07-08",
+        "age": 62,
+        "ageGroup": "adult"
+      },
+      "location": {
+        "street": "112, Avenue Pascal Assassa",
+        "city": "Brazzaville",
+        "state": "Brazzaville",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.26613,
+          "longitude": 15.28318,
+          "precision": "city"
+        },
+        "formatted": "112, Avenue Pascal Assassa\nBrazzaville"
+      },
+      "email": "d.okoula.vvd01@example.test",
+      "phone": "+242061250432",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0934.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0934.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0934.webp"
+      }
+    },
+    {
+      "id": "per_f3de4378df8e3444f6f7c128",
+      "gender": "male",
+      "name": {
+        "first": "Théophile",
+        "last": "Okoula",
+        "full": "Théophile Okoula"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1969-05-25",
+        "age": 57,
+        "ageGroup": "adult"
+      },
+      "location": {
+        "street": "20, Rue Banvidi",
+        "city": "Bouansa",
+        "state": "Bouenza",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.21861,
+          "longitude": 13.76167,
+          "precision": "city"
+        },
+        "formatted": "20, Rue Banvidi\nBouansa"
+      },
+      "email": "t.okoula.2wv05@example.test",
+      "phone": "+242061284437",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0545.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0545.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0545.webp"
+      }
+    }
+  ],
+  "meta": {
+    "count": 6,
+    "asOf": "2026-10-03",
+    "seed": "meditime-doctors-male",
+    "dataVersion": "geo-2026-09-26.1",
+    "catalogVersion": "v1",
+    "schemaVersion": "2"
+  },
+  "selection": {
+    "perBand": 2,
+    "sourceCount": 30,
+    "ageBands": [
+      "28-40",
+      "41-55",
+      "56-70"
+    ]
+  }
+}

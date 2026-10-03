@@ -1,0 +1,126 @@
+{
+  "results": [
+    {
+      "id": "per_41203e8c48eb288f69f6964d",
+      "gender": "male",
+      "name": {
+        "first": "Pascal",
+        "last": "Ngoto",
+        "full": "Pascal Ngoto"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1994-03-07",
+        "age": 32,
+        "ageGroup": "adult"
+      },
+      "location": {
+        "street": "155, Boulevard Guillaume Ngoto",
+        "city": "Brazzaville",
+        "state": "Brazzaville",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.26613,
+          "longitude": 15.28318,
+          "precision": "city"
+        },
+        "formatted": "155, Boulevard Guillaume Ngoto\nBrazzaville"
+      },
+      "email": "p.ngoto.sjl00@example.test",
+      "phone": "+242061227501",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0928.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0928.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0928.webp"
+      }
+    },
+    {
+      "id": "per_9c85e30011518e8a6ba6e826",
+      "gender": "male",
+      "name": {
+        "first": "Pascal",
+        "last": "Okoula",
+        "full": "Pascal Okoula"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1977-12-17",
+        "age": 48,
+        "ageGroup": "adult"
+      },
+      "location": {
+        "street": "132, Boulevard Hortense Banvidi",
+        "city": "Brazzaville",
+        "state": "Brazzaville",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.26613,
+          "longitude": 15.28318,
+          "precision": "city"
+        },
+        "formatted": "132, Boulevard Hortense Banvidi\nBrazzaville"
+      },
+      "email": "p.okoula.vx701@example.test",
+      "phone": "+242061285889",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0394.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0394.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0394.webp"
+      }
+    },
+    {
+      "id": "per_ebab8b1938660c8bf7c2a282",
+      "gender": "male",
+      "name": {
+        "first": "Guillaume",
+        "last": "Banvidi",
+        "full": "Guillaume Banvidi"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1997-03-03",
+        "age": 29,
+        "ageGroup": "adult"
+      },
+      "location": {
+        "street": "77, Avenue Banvidi",
+        "city": "Kayes",
+        "state": "Bouenza",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.20493,
+          "longitude": 13.28608,
+          "precision": "city"
+        },
+        "formatted": "77, Avenue Banvidi\nKayes"
+      },
+      "email": "g.banvidi.uv402@example.test",
+      "phone": "+242061223970",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0929.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0929.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0929.webp"
+      }
+    }
+  ],
+  "meta": {
+    "count": 3,
+    "asOf": "2026-10-03",
+    "seed": "meditime-patients-adult-male",
+    "dataVersion": "geo-2026-09-26.1",
+    "catalogVersion": "v1",
+    "schemaVersion": "2"
+  }
+}

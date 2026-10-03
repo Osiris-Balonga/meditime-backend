@@ -1,0 +1,249 @@
+{
+  "results": [
+    {
+      "id": "per_2f586e1a576be55991262cf5",
+      "gender": "female",
+      "name": {
+        "first": "Simone",
+        "last": "Ngoto",
+        "full": "Simone Ngoto"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1993-12-16",
+        "age": 32,
+        "ageGroup": "adult"
+      },
+      "location": {
+        "street": "164, Boulevard Hortense Banvidi",
+        "city": "Sibiti",
+        "state": "Lékoumou",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -3.68192,
+          "longitude": 13.34985,
+          "precision": "city"
+        },
+        "formatted": "164, Boulevard Hortense Banvidi\nSibiti"
+      },
+      "email": "s.ngoto.zpu02@example.test",
+      "phone": "+242061231528",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0542.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0542.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0542.webp"
+      }
+    },
+    {
+      "id": "per_4c427a2efa5e5098bf16d978",
+      "gender": "female",
+      "name": {
+        "first": "Charlotte",
+        "last": "Assassa",
+        "full": "Charlotte Assassa"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1992-07-17",
+        "age": 34,
+        "ageGroup": "adult"
+      },
+      "location": {
+        "street": "134, Rue Simone Okoula",
+        "city": "Sibiti",
+        "state": "Lékoumou",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -3.68192,
+          "longitude": 13.34985,
+          "precision": "city"
+        },
+        "formatted": "134, Rue Simone Okoula\nSibiti"
+      },
+      "email": "c.assassa.i2p0a@example.test",
+      "phone": "+242061253125",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0904.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0904.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0904.webp"
+      }
+    },
+    {
+      "id": "per_c9dbbf277edd4aa566a23c03",
+      "gender": "female",
+      "name": {
+        "first": "Jeanne",
+        "last": "Mahinga",
+        "full": "Jeanne Mahinga"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1973-05-23",
+        "age": 53,
+        "ageGroup": "adult"
+      },
+      "location": {
+        "street": "76, Boulevard Théophile Mahinga",
+        "city": "Brazzaville",
+        "state": "Brazzaville",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.26613,
+          "longitude": 15.28318,
+          "precision": "city"
+        },
+        "formatted": "76, Boulevard Théophile Mahinga\nBrazzaville"
+      },
+      "email": "j.mahinga.rxu0g@example.test",
+      "phone": "+242061228810",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0909.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0909.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0909.webp"
+      }
+    },
+    {
+      "id": "per_5d54bd2c60d0a46ee19ec690",
+      "gender": "female",
+      "name": {
+        "first": "Simone",
+        "last": "Banvidi",
+        "full": "Simone Banvidi"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1985-10-03",
+        "age": 41,
+        "ageGroup": "adult"
+      },
+      "location": {
+        "street": "161, Rue Charlotte Ngoto",
+        "city": "Dolisie",
+        "state": "Niari",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.19834,
+          "longitude": 12.66664,
+          "precision": "city"
+        },
+        "formatted": "161, Rue Charlotte Ngoto\nDolisie"
+      },
+      "email": "s.banvidi.4k10i@example.test",
+      "phone": "+242061283732",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0907.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0907.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0907.webp"
+      }
+    },
+    {
+      "id": "per_34db1b3cccfc3c62b87536e0",
+      "gender": "female",
+      "name": {
+        "first": "Charlotte",
+        "last": "Okoula",
+        "full": "Charlotte Okoula"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1958-09-28",
+        "age": 68,
+        "ageGroup": "senior"
+      },
+      "location": {
+        "street": "59, Rue Simone Okoula",
+        "city": "Pointe-Noire",
+        "state": "Pointe-Noire",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.77609,
+          "longitude": 11.86352,
+          "precision": "city"
+        },
+        "formatted": "59, Rue Simone Okoula\nPointe-Noire"
+      },
+      "email": "c.okoula.m0j00@example.test",
+      "phone": "+242061299757",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0915.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0915.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0915.webp"
+      }
+    },
+    {
+      "id": "per_03434040d6a8920d0dd46632",
+      "gender": "female",
+      "name": {
+        "first": "Charlotte",
+        "last": "Adoua",
+        "full": "Charlotte Adoua"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1966-09-01",
+        "age": 60,
+        "ageGroup": "adult"
+      },
+      "location": {
+        "street": "170, Boulevard Jeanne Banvidi",
+        "city": "Pointe-Noire",
+        "state": "Pointe-Noire",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.77609,
+          "longitude": 11.86352,
+          "precision": "city"
+        },
+        "formatted": "170, Boulevard Jeanne Banvidi\nPointe-Noire"
+      },
+      "email": "c.adoua.93j04@example.test",
+      "phone": "+242061206994",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0911.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0911.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0911.webp"
+      }
+    }
+  ],
+  "meta": {
+    "count": 6,
+    "asOf": "2026-10-03",
+    "seed": "meditime-doctors-female",
+    "dataVersion": "geo-2026-09-26.1",
+    "catalogVersion": "v1",
+    "schemaVersion": "2"
+  },
+  "selection": {
+    "perBand": 2,
+    "sourceCount": 30,
+    "ageBands": [
+      "28-40",
+      "41-55",
+      "56-70"
+    ]
+  }
+}
