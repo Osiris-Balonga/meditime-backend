@@ -30,7 +30,7 @@
         },
         "formatted": "203, Rue Adoua\nGamboma"
       },
-      "email": "p.mahinga.l3100@example.test",
+      "email": "p.mahinga.l3100@yopmail.com",
       "phone": "+242061230391",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0894.webp",
@@ -68,7 +68,7 @@
         },
         "formatted": "191, Rue Ngoto\nNkayi"
       },
-      "email": "h.banvidi.92y01@example.test",
+      "email": "h.banvidi.92y01@yopmail.com",
       "phone": "+242061215366",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0086.webp",
@@ -106,7 +106,7 @@
         },
         "formatted": "112, Rue Assassa\nDolisie"
       },
-      "email": "c.banvidi.itv02@example.test",
+      "email": "c.banvidi.itv02@yopmail.com",
       "phone": "+242061239825",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0895.webp",
@@ -122,5 +122,6 @@
     "dataVersion": "geo-2026-09-26.1",
     "catalogVersion": "v1",
     "schemaVersion": "2"
-  }
+  },
+  "emailDomain": "yopmail.com"
 }

@@ -30,7 +30,7 @@
         },
         "formatted": "164, Boulevard Hortense Banvidi\nSibiti"
       },
-      "email": "s.ngoto.zpu02@example.test",
+      "email": "s.ngoto.zpu02@yopmail.com",
       "phone": "+242061231528",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0542.webp",
@@ -68,7 +68,7 @@
         },
         "formatted": "134, Rue Simone Okoula\nSibiti"
       },
-      "email": "c.assassa.i2p0a@example.test",
+      "email": "c.assassa.i2p0a@yopmail.com",
       "phone": "+242061253125",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0904.webp",
@@ -106,7 +106,7 @@
         },
         "formatted": "76, Boulevard Théophile Mahinga\nBrazzaville"
       },
-      "email": "j.mahinga.rxu0g@example.test",
+      "email": "j.mahinga.rxu0g@yopmail.com",
       "phone": "+242061228810",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0909.webp",
@@ -144,7 +144,7 @@
         },
         "formatted": "161, Rue Charlotte Ngoto\nDolisie"
       },
-      "email": "s.banvidi.4k10i@example.test",
+      "email": "s.banvidi.4k10i@yopmail.com",
       "phone": "+242061283732",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0907.webp",
@@ -182,7 +182,7 @@
         },
         "formatted": "59, Rue Simone Okoula\nPointe-Noire"
       },
-      "email": "c.okoula.m0j00@example.test",
+      "email": "c.okoula.m0j00@yopmail.com",
       "phone": "+242061299757",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0915.webp",
@@ -220,7 +220,7 @@
         },
         "formatted": "170, Boulevard Jeanne Banvidi\nPointe-Noire"
       },
-      "email": "c.adoua.93j04@example.test",
+      "email": "c.adoua.93j04@yopmail.com",
       "phone": "+242061206994",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0911.webp",
@@ -245,5 +245,6 @@
       "41-55",
       "56-70"
     ]
-  }
+  },
+  "emailDomain": "yopmail.com"
 }

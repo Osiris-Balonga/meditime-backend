@@ -24,7 +24,7 @@ npm run dev
 
 API locale : `http://localhost:3001`. `GET /health` vérifie le serveur ; `GET /ready` vérifie aussi PostgreSQL. Les futures routes sont sous `/api/v1`.
 
-Le seed [Persona](prisma/fixtures/README.md) fournit 24 patients congolais répartis entre enfants, adolescents, adultes et seniors, 12 médecins avec portraits, 120 créneaux et 48 demandes fictives. Il conserve les comptes déjà présents et ne permet pas de se connecter avec les emails fictifs. Exécuter les migrations avant le seed : `User.birthDate` conserve les dates de naissance, sans modifier les profils existants.
+Le seed [Persona](prisma/fixtures/README.md) fournit 24 patients congolais répartis entre enfants, adolescents, adultes et seniors, 12 médecins avec portraits, 120 créneaux et 48 demandes fictives. Il conserve les comptes déjà présents. Les [comptes de démonstration](docs/demo-accounts.md) utilisent Yopmail pour récupérer les OTP ; leur envoi nécessite un domaine validé dans Resend. Exécuter les migrations avant le seed : `User.birthDate` conserve les dates de naissance, sans modifier les profils existants.
 
 `DATABASE_URL` utilise le host Neon avec `-pooler` ; `DIRECT_DATABASE_URL` utilise le host direct pour les migrations. Copier les URL depuis Neon avec leurs paramètres SSL. `FRONTEND_ORIGINS` contient les origines frontend autorisées, séparées par des virgules. Ne jamais utiliser la base de production en local.
 

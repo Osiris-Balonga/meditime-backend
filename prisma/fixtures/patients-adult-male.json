@@ -30,7 +30,7 @@
         },
         "formatted": "155, Boulevard Guillaume Ngoto\nBrazzaville"
       },
-      "email": "p.ngoto.sjl00@example.test",
+      "email": "p.ngoto.sjl00@yopmail.com",
       "phone": "+242061227501",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0928.webp",
@@ -68,7 +68,7 @@
         },
         "formatted": "132, Boulevard Hortense Banvidi\nBrazzaville"
       },
-      "email": "p.okoula.vx701@example.test",
+      "email": "p.okoula.vx701@yopmail.com",
       "phone": "+242061285889",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0394.webp",
@@ -106,7 +106,7 @@
         },
         "formatted": "77, Avenue Banvidi\nKayes"
       },
-      "email": "g.banvidi.uv402@example.test",
+      "email": "g.banvidi.uv402@yopmail.com",
       "phone": "+242061223970",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0929.webp",
@@ -122,5 +122,6 @@
     "dataVersion": "geo-2026-09-26.1",
     "catalogVersion": "v1",
     "schemaVersion": "2"
-  }
+  },
+  "emailDomain": "yopmail.com"
 }

@@ -30,7 +30,7 @@
         },
         "formatted": "143, Avenue Théophile Mahinga\nOwando"
       },
-      "email": "d.ngoto.m470e@example.test",
+      "email": "d.ngoto.m470e@yopmail.com",
       "phone": "+242061200477",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0931.webp",
@@ -68,7 +68,7 @@
         },
         "formatted": "144, Boulevard Daniel Okoula\nOuesso"
       },
-      "email": "g.adoua.3da0g@example.test",
+      "email": "g.adoua.3da0g@yopmail.com",
       "phone": "+242061296581",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0929.webp",
@@ -106,7 +106,7 @@
         },
         "formatted": "81, Rue Guillaume Ngoto\nKayes"
       },
-      "email": "m.adoua.lq502@example.test",
+      "email": "m.adoua.lq502@yopmail.com",
       "phone": "+242061235201",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0543.webp",
@@ -144,7 +144,7 @@
         },
         "formatted": "199, Boulevard Théophile Adoua\nBrazzaville"
       },
-      "email": "g.mahinga.qm906@example.test",
+      "email": "g.mahinga.qm906@yopmail.com",
       "phone": "+242061206833",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0932.webp",
@@ -182,7 +182,7 @@
         },
         "formatted": "112, Avenue Pascal Assassa\nBrazzaville"
       },
-      "email": "d.okoula.vvd01@example.test",
+      "email": "d.okoula.vvd01@yopmail.com",
       "phone": "+242061250432",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0934.webp",
@@ -220,7 +220,7 @@
         },
         "formatted": "20, Rue Banvidi\nBouansa"
       },
-      "email": "t.okoula.2wv05@example.test",
+      "email": "t.okoula.2wv05@yopmail.com",
       "phone": "+242061284437",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0545.webp",
@@ -245,5 +245,6 @@
       "41-55",
       "56-70"
     ]
-  }
+  },
+  "emailDomain": "yopmail.com"
 }

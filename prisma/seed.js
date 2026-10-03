@@ -22,7 +22,7 @@ async function loadPeople(file) {
   const fixture = JSON.parse(await readFile(new URL(`./fixtures/${file}.json`, import.meta.url), 'utf8'));
   for (const person of fixture.results) {
     if (person.nationality !== 'CG' || person.location.country.code !== 'CG'
-      || !person.email.endsWith('@example.test') || !person.name.first || !person.name.last
+      || !person.email.endsWith('@yopmail.com') || !person.name.first || !person.name.last
       || !/^\d{4}-\d{2}-\d{2}$/.test(person.dob.date)) throw new Error(`Profil Persona invalide : ${file}.`);
   }
   return fixture.results;
@@ -30,14 +30,15 @@ async function loadPeople(file) {
 
 async function upsertPerson(tx, person) {
   const data = {
+    email: person.email,
     firstName: person.name.first, lastName: person.name.last,
     birthDate: new Date(`${person.dob.date}T00:00:00Z`), avatarUrl: person.picture?.medium ?? null,
     // Les numéros de repli Persona peuvent appartenir à de vrais abonnés.
     phone: null,
   };
   return tx.user.upsert({
-    where: { email: person.email }, update: data,
-    create: { id: demoId(person.id), email: person.email, ...data, profileCompletedAt: new Date() },
+    where: { id: demoId(person.id) }, update: data,
+    create: { id: demoId(person.id), ...data, profileCompletedAt: new Date() },
   });
 }
 

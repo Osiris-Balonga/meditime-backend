@@ -30,7 +30,7 @@
         },
         "formatted": "127, Rue Okoula\nBrazzaville"
       },
-      "email": "g.okoula.rvi00@example.test",
+      "email": "g.okoula.rvi00@yopmail.com",
       "phone": "+242061214589",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0095.webp",
@@ -68,7 +68,7 @@
         },
         "formatted": "54, Avenue Assassa\nPointe-Noire"
       },
-      "email": "t.banvidi.eli01@example.test",
+      "email": "t.banvidi.eli01@yopmail.com",
       "phone": "+242061204504",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0096.webp",
@@ -106,7 +106,7 @@
         },
         "formatted": "151, Rue Mahinga\nNkayi"
       },
-      "email": "t.okoula.d7a02@example.test",
+      "email": "t.okoula.d7a02@yopmail.com",
       "phone": "+242061277931",
       "picture": {
         "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0544.webp",
@@ -122,5 +122,6 @@
     "dataVersion": "geo-2026-09-26.1",
     "catalogVersion": "v1",
     "schemaVersion": "2"
-  }
+  },
+  "emailDomain": "yopmail.com"
 }
