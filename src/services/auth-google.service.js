@@ -45,11 +45,11 @@ export async function signInWithGoogle(body, auth) {
       if (!user) {
         user = await tx.user.findUnique({ where: { email }, select: userSelect });
         const authoritativeEmail = email.endsWith('@gmail.com') || Boolean(payload.hd);
-        if ((user && auth?.userId !== user.id) || (!authoritativeEmail && !auth)) {
-          throw new HttpError(409, 'EMAIL_VERIFICATION_REQUIRED', 'Connectez-vous avec le code envoyé à cette adresse, puis réessayez Google pour lier votre compte.');
-        }
         if (auth && (!user || auth.userId !== user.id)) {
           throw new HttpError(409, 'GOOGLE_EMAIL_MISMATCH', 'Utilisez l’identité Google correspondant à votre compte connecté.');
+        }
+        if (!authoritativeEmail && !auth) {
+          throw new HttpError(409, 'EMAIL_VERIFICATION_REQUIRED', 'Connectez-vous avec le code envoyé à cette adresse, puis réessayez Google pour lier votre compte.');
         }
         if (!user) {
           user = await tx.user.create({ data: {
