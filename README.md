@@ -83,6 +83,8 @@ Le parcours Google utilise le popup de Google Identity Services, puis envoie `cr
 
 Les endpoints et les règles d'intégration sont dans [docs/auth.md](docs/auth.md). Les requêtes frontend utilisent `credentials: 'include'`. Après connexion, conserver `csrfToken` retourné et l'envoyer dans `X-CSRF-Token` sur les écritures authentifiées ; `GET /api/v1/me` permet de le récupérer après rechargement. Envoyer un corps JSON, y compris `{}` pour la déconnexion.
 
+Le contrat de recherche, planning, demandes et tableaux de bord est dans [docs/booking-api.md](docs/booking-api.md). Les créneaux sont calculés sur huit semaines dans le fuseau du médecin. Une demande reste en attente jusqu'à sa confirmation par le médecin.
+
 Pour les autres modules, importer `requireSession`, `requireDoctor` et `requireCsrf` depuis `src/middlewares/auth.js`. Les identifiants autorisés sont `req.auth.userId` et `req.auth.doctorId`, jamais ceux du corps JSON. `lockDoctor(tx, doctorId)` fournit le verrou commun à utiliser dans les mutations de planning et de demandes.
 
 L'habilitation médecin est interne, dans la base configurée :
