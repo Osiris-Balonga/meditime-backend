@@ -19,7 +19,7 @@ const body = (req) => {
 // #9
 export const create = asyncHandler(async (req, res) => {
   const { slotId, reason } = body(req);
-  const data = await appointments.createRequest(req.user.id, {
+  const data = await appointments.createRequest(req.auth.userId, {
     slotId: requireUuid(slotId, "slotId"),
     reason: parseReason(reason),
   });
@@ -28,7 +28,7 @@ export const create = asyncHandler(async (req, res) => {
 export const listMine = asyncHandler(async (req, res) => {
   res.json({
     data: await appointments.listPatientRequests(
-      req.user.id,
+      req.auth.userId,
       parseListQuery(req.query),
     ),
   });
@@ -36,7 +36,7 @@ export const listMine = asyncHandler(async (req, res) => {
 export const cancel = asyncHandler(async (req, res) => {
   res.json({
     data: await appointments.cancelRequest(
-      req.user.id,
+      req.auth.userId,
       requireUuid(req.params.id, "id"),
     ),
   });
@@ -46,7 +46,7 @@ export const cancel = asyncHandler(async (req, res) => {
 export const listForDoctor = asyncHandler(async (req, res) => {
   res.json({
     data: await decisions.listDoctorRequests(
-      req.user.id,
+      req.auth.userId,
       parseListQuery(req.query),
     ),
   });
@@ -55,7 +55,7 @@ export const decide = (decision) =>
   asyncHandler(async (req, res) => {
     res.json({
       data: await decisions.decideRequest(
-        req.user.id,
+        req.auth.userId,
         requireUuid(req.params.id, "id"),
         decision,
       ),
@@ -64,8 +64,8 @@ export const decide = (decision) =>
 
 // #11
 export const patientDashboard = asyncHandler(async (req, res) => {
-  res.json({ data: await dashboard.patientDashboard(req.user.id) });
+  res.json({ data: await dashboard.patientDashboard(req.auth.userId) });
 });
 export const doctorDashboard = asyncHandler(async (req, res) => {
-  res.json({ data: await dashboard.doctorDashboard(req.user.id) });
+  res.json({ data: await dashboard.doctorDashboard(req.auth.userId) });
 });
