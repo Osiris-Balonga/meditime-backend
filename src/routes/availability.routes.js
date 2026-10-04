@@ -1,9 +1,12 @@
 import { Router } from 'express';
 import { requireCsrf, requireDoctor, requireSession } from '../middlewares/auth.js';
 import { readSlots, saveWeekly, weeklyAvailability } from '../services/availability.service.js';
+import { addException, removeException } from '../services/exception.service.js';
 const router = Router();
 router.get('/doctors/:id/slots', async (req, res) => res.json(await readSlots(req.params.id, req.query)));
 router.get('/me/doctor/availability', requireSession, requireDoctor, async (req, res) => res.json(await weeklyAvailability(req.auth.doctorId)));
 router.put('/me/doctor/availability', requireSession, requireDoctor, requireCsrf, async (req, res) => res.json(await saveWeekly(req.auth.doctorId, req.body)));
 router.get('/me/doctor/planning', requireSession, requireDoctor, async (req, res) => res.json(await readSlots(req.auth.doctorId, req.query, true)));
+router.post('/me/doctor/exceptions', requireSession, requireDoctor, requireCsrf, async (req, res) => res.status(201).json({ exception: await addException(req.auth.doctorId, req.body) }));
+router.delete('/me/doctor/exceptions/:id', requireSession, requireDoctor, requireCsrf, async (req, res) => { await removeException(req.auth.doctorId, req.params.id); res.sendStatus(204); });
 export default router;

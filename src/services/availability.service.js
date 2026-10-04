@@ -90,5 +90,6 @@ export async function readSlots(id, query, privatePlanning = false) {
   const slots = await prisma.slot.findMany({ where: { doctorId: id, startsAt: { gte: dates.from, lt: dates.to, ...(!privatePlanning && { gt: new Date() }) } }, orderBy: { startsAt: 'asc' }, select: {
     ...slotSelect, requests: { where: { status: 'CONFIRMED' }, select: privatePlanning ? { id: true, reason: true, patient: { select: { id: true, firstName: true, lastName: true, avatarUrl: true } } } : { id: true } },
   } });
-  return { timezone: doctor.timezone, slots: slots.map(({ requests, ...slot }) => ({ ...slot, status: requests.length ? 'OCCUPIED' : slot.status, ...(privatePlanning && { appointment: requests[0] ?? null }) })) };
+  const exceptions = privatePlanning ? await prisma.availabilityException.findMany({ where: { doctorId: id, date: { gte: new Date(`${dates.start.toISODate()}T00:00:00Z`), lt: new Date(`${dates.end.toISODate()}T00:00:00Z`) } }, orderBy: { date: 'asc' } }) : undefined;
+  return { timezone: doctor.timezone, slots: slots.map(({ requests, ...slot }) => ({ ...slot, status: requests.length ? 'occupied' : slot.status.toLowerCase(), ...(privatePlanning && { appointment: requests[0] ?? null }) })), ...(privatePlanning && { exceptions }) };
 }
