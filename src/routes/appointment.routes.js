@@ -1,8 +1,12 @@
 import { Router } from 'express';
-import { requireCsrf, requireSession } from '../middlewares/auth.js';
+import { requireCsrf, requireDoctor, requireSession } from '../middlewares/auth.js';
+import { decideAppointment } from '../services/doctor-decision.service.js';
 import { appointmentDetail, createAppointment, listAppointments } from '../services/appointment.service.js';
 const router = Router();
 router.post('/appointments', requireSession, requireCsrf, async (req, res) => res.status(201).json({ appointment: await createAppointment(req.auth.userId, req.body) }));
 router.get('/me/appointments', requireSession, async (req, res) => res.json(await listAppointments({ patientId: req.auth.userId }, req.query)));
+router.get('/me/doctor/appointments', requireSession, requireDoctor, async (req, res) => res.json(await listAppointments({ slot: { doctorId: req.auth.doctorId } }, req.query)));
+router.post('/appointments/:id/accept', requireSession, requireDoctor, requireCsrf, async (req, res) => res.json({ appointment: await decideAppointment(req.auth.doctorId, req.params.id, true, req.body) }));
+router.post('/appointments/:id/decline', requireSession, requireDoctor, requireCsrf, async (req, res) => res.json({ appointment: await decideAppointment(req.auth.doctorId, req.params.id, false, req.body) }));
 router.get('/appointments/:id', requireSession, async (req, res) => res.json({ appointment: await appointmentDetail(req.params.id, req.auth) }));
 export default router;
