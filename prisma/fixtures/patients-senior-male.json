@@ -1,0 +1,127 @@
+{
+  "results": [
+    {
+      "id": "per_ddee3bf25313e90b7ed00584",
+      "gender": "male",
+      "name": {
+        "first": "Michel",
+        "last": "Mahinga",
+        "full": "Michel Mahinga"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1927-05-31",
+        "age": 99,
+        "ageGroup": "senior"
+      },
+      "location": {
+        "street": "60, Avenue Mahinga",
+        "city": "Nkayi",
+        "state": "Bouenza",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.18396,
+          "longitude": 13.2859,
+          "precision": "city"
+        },
+        "formatted": "60, Avenue Mahinga\nNkayi"
+      },
+      "email": "m.mahinga.vyl00@yopmail.com",
+      "phone": "+242061223828",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0940.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0940.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0940.webp"
+      }
+    },
+    {
+      "id": "per_120685482ad7b3de3e4f1e1f",
+      "gender": "male",
+      "name": {
+        "first": "Michel",
+        "last": "Assassa",
+        "full": "Michel Assassa"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1953-06-07",
+        "age": 73,
+        "ageGroup": "senior"
+      },
+      "location": {
+        "street": "196, Rue Daniel Banvidi",
+        "city": "Pointe-Noire",
+        "state": "Pointe-Noire",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.77609,
+          "longitude": 11.86352,
+          "precision": "city"
+        },
+        "formatted": "196, Rue Daniel Banvidi\nPointe-Noire"
+      },
+      "email": "m.assassa.odm01@yopmail.com",
+      "phone": "+242061267281",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0396.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0396.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0396.webp"
+      }
+    },
+    {
+      "id": "per_08e19a8739ea3afcc585cee6",
+      "gender": "male",
+      "name": {
+        "first": "Daniel",
+        "last": "Okoula",
+        "full": "Daniel Okoula"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "1958-06-21",
+        "age": 68,
+        "ageGroup": "senior"
+      },
+      "location": {
+        "street": "238, Boulevard Jeanne Ngoto",
+        "city": "Brazzaville",
+        "state": "Brazzaville",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.26613,
+          "longitude": 15.28318,
+          "precision": "city"
+        },
+        "formatted": "238, Boulevard Jeanne Ngoto\nBrazzaville"
+      },
+      "email": "d.okoula.we202@yopmail.com",
+      "phone": "+242061274789",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0938.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0938.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0938.webp"
+      }
+    }
+  ],
+  "meta": {
+    "count": 3,
+    "asOf": "2026-10-03",
+    "seed": "meditime-patients-senior-male",
+    "dataVersion": "geo-2026-09-26.1",
+    "catalogVersion": "v1",
+    "schemaVersion": "2"
+  },
+  "emailDomain": "yopmail.com"
+}
