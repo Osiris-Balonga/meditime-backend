@@ -1,0 +1,127 @@
+{
+  "results": [
+    {
+      "id": "per_a8424e4635cd8e806b574d1d",
+      "gender": "female",
+      "name": {
+        "first": "Charlotte",
+        "last": "Mahinga",
+        "full": "Charlotte Mahinga"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "2008-12-18",
+        "age": 17,
+        "ageGroup": "teen"
+      },
+      "location": {
+        "street": "143, Avenue Simone Okoula",
+        "city": "Nkayi",
+        "state": "Bouenza",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.18396,
+          "longitude": 13.2859,
+          "precision": "city"
+        },
+        "formatted": "143, Avenue Simone Okoula\nNkayi"
+      },
+      "email": "c.mahinga.jvh00@yopmail.com",
+      "phone": "+242061212871",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0901.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0901.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0901.webp"
+      }
+    },
+    {
+      "id": "per_de41436b46d376387351fe3e",
+      "gender": "female",
+      "name": {
+        "first": "Pascaline",
+        "last": "Ngoto",
+        "full": "Pascaline Ngoto"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "2009-08-02",
+        "age": 17,
+        "ageGroup": "teen"
+      },
+      "location": {
+        "street": "44, Avenue Daniel Mahinga",
+        "city": "Brazzaville",
+        "state": "Brazzaville",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.26613,
+          "longitude": 15.28318,
+          "precision": "city"
+        },
+        "formatted": "44, Avenue Daniel Mahinga\nBrazzaville"
+      },
+      "email": "p.ngoto.rw601@yopmail.com",
+      "phone": "+242061203973",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0540.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0540.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0540.webp"
+      }
+    },
+    {
+      "id": "per_18ac89b38abae9e896546e5a",
+      "gender": "female",
+      "name": {
+        "first": "Jeanne",
+        "last": "Assassa",
+        "full": "Jeanne Assassa"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "2012-10-12",
+        "age": 13,
+        "ageGroup": "teen"
+      },
+      "location": {
+        "street": "24, Boulevard Adoua",
+        "city": "Nkayi",
+        "state": "Bouenza",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.18396,
+          "longitude": 13.2859,
+          "precision": "city"
+        },
+        "formatted": "24, Boulevard Adoua\nNkayi"
+      },
+      "email": "j.assassa.9rv02@yopmail.com",
+      "phone": "+242061254385",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0900.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0900.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0900.webp"
+      }
+    }
+  ],
+  "meta": {
+    "count": 3,
+    "asOf": "2026-10-03",
+    "seed": "meditime-patients-teen-female",
+    "dataVersion": "geo-2026-09-26.1",
+    "catalogVersion": "v1",
+    "schemaVersion": "2"
+  },
+  "emailDomain": "yopmail.com"
+}

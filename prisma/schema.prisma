@@ -29,6 +29,7 @@ model User {
   email              String               @unique
   firstName          String?
   lastName           String?
+  birthDate          DateTime?            @db.Date
   phone              String?
   avatarUrl          String?
   profileCompletedAt DateTime?            @db.Timestamptz(3)
