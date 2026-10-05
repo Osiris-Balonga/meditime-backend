@@ -9,6 +9,9 @@ const parsed = z.object({
   SESSION_SECRET: z.preprocess((value) => value || undefined, z.string().min(32).optional()),
   SESSION_SAME_SITE: z.preprocess((value) => value || undefined, z.enum(['lax', 'strict', 'none']).optional()),
   GOOGLE_CLIENT_ID: z.preprocess((value) => value || undefined, z.string().max(512).optional()),
+  EMAIL_PROVIDER: z.preprocess((value) => value || 'resend', z.enum(['resend', 'gmail'])),
+  GMAIL_USER: z.preprocess((value) => value || undefined, z.email().max(254).optional()),
+  GMAIL_APP_PASSWORD: z.preprocess((value) => value?.replace(/\s/g, '') || undefined, z.string().length(16).optional()),
   EMAIL_API_KEY: z.preprocess((value) => value || undefined, z.string().optional()),
   EMAIL_FROM: z.preprocess((value) => value || undefined, z.string().max(254).optional()),
 }).safeParse(process.env);
