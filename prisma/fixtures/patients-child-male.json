@@ -1,0 +1,127 @@
+{
+  "results": [
+    {
+      "id": "per_309175802da028b701c2dddf",
+      "gender": "male",
+      "name": {
+        "first": "Guillaume",
+        "last": "Okoula",
+        "full": "Guillaume Okoula"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "2018-09-14",
+        "age": 8,
+        "ageGroup": "child"
+      },
+      "location": {
+        "street": "132, Boulevard Banvidi",
+        "city": "Pointe-Noire",
+        "state": "Pointe-Noire",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.77609,
+          "longitude": 11.86352,
+          "precision": "city"
+        },
+        "formatted": "132, Boulevard Banvidi\nPointe-Noire"
+      },
+      "email": "g.okoula.baj00@yopmail.com",
+      "phone": "+242061225786",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0918.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0918.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0918.webp"
+      }
+    },
+    {
+      "id": "per_67743ab79524ca7fd0188b9d",
+      "gender": "male",
+      "name": {
+        "first": "Daniel",
+        "last": "Adoua",
+        "full": "Daniel Adoua"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "2015-03-15",
+        "age": 11,
+        "ageGroup": "child"
+      },
+      "location": {
+        "street": "201, Rue Mahinga",
+        "city": "Brazzaville",
+        "state": "Brazzaville",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.26613,
+          "longitude": 15.28318,
+          "precision": "city"
+        },
+        "formatted": "201, Rue Mahinga\nBrazzaville"
+      },
+      "email": "d.adoua.u8j01@yopmail.com",
+      "phone": "+242061241615",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0920.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0920.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0920.webp"
+      }
+    },
+    {
+      "id": "per_6824498fa7ddfa1f26146502",
+      "gender": "male",
+      "name": {
+        "first": "Théophile",
+        "last": "Ngoto",
+        "full": "Théophile Ngoto"
+      },
+      "nationality": "CG",
+      "dob": {
+        "date": "2016-04-06",
+        "age": 10,
+        "ageGroup": "child"
+      },
+      "location": {
+        "street": "151, Boulevard Banvidi",
+        "city": "Brazzaville",
+        "state": "Brazzaville",
+        "country": {
+          "code": "CG",
+          "name": "Congo"
+        },
+        "postcode": null,
+        "coordinates": {
+          "latitude": -4.26613,
+          "longitude": 15.28318,
+          "precision": "city"
+        },
+        "formatted": "151, Boulevard Banvidi\nBrazzaville"
+      },
+      "email": "t.ngoto.1q602@yopmail.com",
+      "phone": "+242061230836",
+      "picture": {
+        "large": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/large/p_0088.webp",
+        "medium": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/medium/p_0088.webp",
+        "thumbnail": "https://persona-portraits.osirisbalonga.workers.dev/portraits/v1/thumbnail/p_0088.webp"
+      }
+    }
+  ],
+  "meta": {
+    "count": 3,
+    "asOf": "2026-10-03",
+    "seed": "meditime-patients-child-male",
+    "dataVersion": "geo-2026-09-26.1",
+    "catalogVersion": "v1",
+    "schemaVersion": "2"
+  },
+  "emailDomain": "yopmail.com"
+}

@@ -1,128 +1,80 @@
-import { prisma } from "../lib/prisma.js";
-import { HttpError } from "../middlewares/errors.js";
-import { presentRequest } from "../lib/appointmentPresenter.js";
-export const TX_OPTIONS = { maxWait: 10000, timeout: 30000 };
+import { z } from 'zod';
+import { prisma } from '../lib/prisma.js';
+import { HttpError } from '../middlewares/errors.js';
+import { lockedDoctor } from './availability.service.js';
+import { publicDoctorSelect, uuid } from './doctor.service.js';
 
-export const requestInclude = {
-  slot: { include: { doctor: { include: { user: true, specialty: true } } } },
+const requestInput = z.object({ slotId: uuid, reason: z.string().trim().max(1000).optional() }).strict();
+const listInput = z.object({
+  status: z.enum(['pending', 'confirmed', 'declined', 'cancelled', 'past']).optional(),
+  from: z.iso.datetime({ offset: true }).optional(), to: z.iso.datetime({ offset: true }).optional(),
+  page: z.coerce.number().int().min(1).max(1000).default(1), limit: z.coerce.number().int().min(1).max(50).default(20),
+}).strict();
+export const appointmentSelect = {
+  id: true, status: true, reason: true, decisionCode: true, createdAt: true, decidedAt: true,
+  patient: { select: { id: true, firstName: true, lastName: true, avatarUrl: true } },
+  slot: { select: { id: true, startsAt: true, endsAt: true, doctor: { select: publicDoctorSelect } } },
 };
-
-// Verrou de ligne : sérialise les demandes et décisions concurrentes sur un même créneau.
-export async function lockSlot(tx, slotId) {
-  const rows =
-    await tx.$queryRaw`SELECT id FROM "Slot" WHERE id = ${slotId}::uuid FOR UPDATE`;
-  return rows.length > 0;
+export function presentAppointment(request) {
+  return { ...request, status: request.status.toLowerCase(), isPast: request.status === 'CONFIRMED' && request.slot.endsAt <= new Date() };
 }
-
-// #9 — le patient envoie une demande sur un créneau.
-export async function createRequest(patientId, { slotId, reason }) {
-  const created = await prisma.$transaction(async (tx) => {
-    if (!(await lockSlot(tx, slotId)))
-      throw new HttpError(404, "SLOT_NOT_FOUND", "Ce créneau est introuvable.");
-    const slot = await tx.slot.findUnique({
-      where: { id: slotId },
-      include: { doctor: true },
-    });
-
-    // Un médecin non approuvé ou non publié n'existe pas pour le public.
-    if (!slot.doctor.isApproved || !slot.doctor.published) {
-      throw new HttpError(404, "SLOT_NOT_FOUND", "Ce créneau est introuvable.");
-    }
-    if (slot.doctor.userId === patientId) {
-      throw new HttpError(
-        403,
-        "OWN_SLOT",
-        "Vous ne pouvez pas demander un de vos propres créneaux.",
-      );
-    }
-    if (slot.status !== "AVAILABLE")
-      throw new HttpError(
-        409,
-        "SLOT_UNAVAILABLE",
-        "Ce créneau n’est plus disponible.",
-      );
-    if (slot.startsAt <= new Date())
-      throw new HttpError(409, "SLOT_PAST", "Ce créneau est déjà passé.");
-
-    const active = await tx.appointmentRequest.findMany({
-      where: { slotId, status: { in: ["PENDING", "CONFIRMED"] } },
-      select: { patientId: true, status: true },
-    });
-    if (active.some((r) => r.status === "CONFIRMED")) {
-      throw new HttpError(
-        409,
-        "SLOT_UNAVAILABLE",
-        "Ce créneau n’est plus disponible.",
-      );
-    }
-    if (active.some((r) => r.patientId === patientId)) {
-      throw new HttpError(
-        409,
-        "DUPLICATE_REQUEST",
-        "Vous avez déjà une demande en attente sur ce créneau.",
-      );
-    }
-    return tx.appointmentRequest.create({
-      data: { slotId, patientId, reason },
-      include: requestInclude,
-    });
-  });
-  return presentRequest(created);
+export async function expireRequests(db, scope) {
+  await db.appointmentRequest.updateMany({ where: { ...scope, status: 'PENDING', slot: { ...(scope.slot ?? {}), startsAt: { lte: new Date() } } }, data: { status: 'CANCELLED', decisionCode: 'REQUEST_EXPIRED', decidedAt: new Date() } });
 }
-
-// #9 — suivi des demandes du patient connecté.
-export async function listPatientRequests(patientId, { status, limit, page }) {
-  const where = { patientId, ...(status && { status }) };
-  const [items, total] = await Promise.all([
-    prisma.appointmentRequest.findMany({
-      where,
-      include: requestInclude,
-      orderBy: { createdAt: "desc" },
-      take: limit,
-      skip: (page - 1) * limit,
-    }),
+export async function createAppointment(userId, body) {
+  const { slotId, reason } = requestInput.parse(body);
+  const reference = await prisma.slot.findUnique({ where: { id: slotId }, select: { doctorId: true } });
+  if (!reference) throw new HttpError(404, 'SLOT_NOT_FOUND', 'Ce créneau n’existe pas.');
+  try {
+    return await prisma.$transaction(async tx => {
+      const doctor = await lockedDoctor(tx, reference.doctorId);
+      if (doctor.userId === userId) throw new HttpError(403, 'OWN_SLOT', 'Vous ne pouvez pas demander un de vos propres créneaux.');
+      const user = await tx.user.findUnique({ where: { id: userId }, select: { profileCompletedAt: true } });
+      if (!user?.profileCompletedAt) throw new HttpError(409, 'PROFILE_INCOMPLETE', 'Complétez votre profil avant de demander un rendez-vous.');
+      const slot = await tx.slot.findUnique({ where: { id: slotId }, include: { requests: { where: { status: 'CONFIRMED' } } } });
+      if (!doctor.published || !slot || slot.startsAt <= new Date() || slot.status !== 'AVAILABLE' || slot.requests.length) throw new HttpError(409, 'SLOT_UNAVAILABLE', 'Ce créneau n’est plus disponible.');
+      const duplicate = await tx.appointmentRequest.findFirst({ where: { slotId, patientId: userId, status: { in: ['PENDING', 'CONFIRMED'] } } });
+      if (duplicate) throw new HttpError(409, 'DUPLICATE_REQUEST', 'Vous avez déjà une demande active pour ce créneau.');
+      return presentAppointment(await tx.appointmentRequest.create({ data: { slotId, patientId: userId, reason: reason || null }, select: appointmentSelect }));
+    }, { timeout: 15000 });
+  } catch (error) {
+    if (error.code === 'P2002') throw new HttpError(409, 'DUPLICATE_REQUEST', 'Vous avez déjà une demande active pour ce créneau.');
+    throw error;
+  }
+}
+export async function listAppointments(scope, query) {
+  const { status, from, to, page, limit } = listInput.parse(query);
+  if (from && to && new Date(from) >= new Date(to)) throw new HttpError(400, 'INVALID_DATE_RANGE', 'La fin doit suivre le début.');
+  await expireRequests(prisma, scope);
+  const time = { ...(from && { gte: new Date(from) }), ...(to && { lt: new Date(to) }) };
+  const where = { ...scope, ...(status && { status: status === 'past' ? 'CONFIRMED' : status.toUpperCase() }), slot: {
+    ...(scope.slot ?? {}), ...((from || to) && { startsAt: time }),
+    ...(status === 'past' && { endsAt: { lte: new Date() } }), ...(status === 'confirmed' && { endsAt: { gt: new Date() } }),
+  } };
+  const [appointments, total] = await prisma.$transaction([
+    prisma.appointmentRequest.findMany({ where, select: appointmentSelect, orderBy: [{ slot: { startsAt: 'asc' } }, { id: 'asc' }], skip: (page - 1) * limit, take: limit }),
     prisma.appointmentRequest.count({ where }),
   ]);
-  const now = new Date();
-  return {
-    items: items.map((r) => presentRequest(r, now)),
-    page,
-    limit,
-    total,
-  };
+  return { appointments: appointments.map(presentAppointment), pagination: { page, limit, total } };
+}
+export async function appointmentDetail(id, auth) {
+  uuid.parse(id);
+  const where = { id, OR: [{ patientId: auth.userId }, ...(auth.doctorId ? [{ slot: { doctorId: auth.doctorId } }] : [])] };
+  await expireRequests(prisma, where);
+  const request = await prisma.appointmentRequest.findFirst({ where, select: appointmentSelect });
+  if (!request) throw new HttpError(404, 'APPOINTMENT_NOT_FOUND', 'Cette demande n’est pas accessible.');
+  return presentAppointment(request);
 }
 
-// #9 — annulation par le patient (demande en attente uniquement).
-export async function cancelRequest(patientId, requestId) {
-  // updateMany conditionnel = atomique : pas de fenêtre entre « vérifier » et « modifier ».
-  const { count } = await prisma.appointmentRequest.updateMany({
-    where: { id: requestId, patientId, status: "PENDING" },
-    data: {
-      status: "CANCELLED",
-      decidedAt: new Date(),
-      decisionCode: "CANCELLED_BY_PATIENT",
-    },
-  });
-  if (count === 0) {
-    const exists = await prisma.appointmentRequest.findFirst({
-      where: { id: requestId, patientId },
-      select: { id: true },
-    });
-    if (!exists)
-      throw new HttpError(
-        404,
-        "REQUEST_NOT_FOUND",
-        "Cette demande est introuvable.",
-      );
-    throw new HttpError(
-      409,
-      "INVALID_STATUS",
-      "Seule une demande en attente peut être annulée.",
-    );
-  }
-  const request = await prisma.appointmentRequest.findUnique({
-    where: { id: requestId },
-    include: requestInclude,
-  });
-  return presentRequest(request);
+// Annulation patient : même verrou que le planning et les décisions médecin.
+export async function cancelRequest(patientId, id) {
+  uuid.parse(id);
+  const reference = await prisma.appointmentRequest.findFirst({ where: { id, patientId }, select: { slot: { select: { doctorId: true } } } });
+  if (!reference) throw new HttpError(404, 'REQUEST_NOT_FOUND', 'Cette demande est introuvable.');
+  return prisma.$transaction(async tx => {
+    await lockedDoctor(tx, reference.slot.doctorId);
+    const { count } = await tx.appointmentRequest.updateMany({ where: { id, patientId, status: 'PENDING' }, data: { status: 'CANCELLED', decidedAt: new Date(), decisionCode: 'CANCELLED_BY_PATIENT' } });
+    if (!count) throw new HttpError(409, 'INVALID_STATUS', 'Seule une demande en attente peut être annulée.');
+    return presentAppointment(await tx.appointmentRequest.findUniqueOrThrow({ where: { id }, select: appointmentSelect }));
+  }, { timeout: 15000 });
 }

@@ -1,142 +1,47 @@
-import { prisma } from "../lib/prisma.js";
-import { HttpError } from "../middlewares/errors.js";
-import { dayBoundsFor } from "../lib/timezone.js";
+import { Prisma } from '@prisma/client';
+import { z } from 'zod';
+import { prisma } from '../lib/prisma.js';
+import { HttpError } from '../middlewares/errors.js';
 
-// Seuls les médecins approuvés ET publiés existent pour le public.
-const visible = { isApproved: true, published: true };
-
-const doctorSelect = {
-  id: true,
-  practiceName: true,
-  address: true,
-  city: true,
-  postalCode: true,
-  timezone: true,
-  consultationMinutes: true,
-  user: { select: { firstName: true, lastName: true } }, // jamais d'e-mail ni de téléphone
-  specialty: { select: { slug: true, name: true } },
+export const publicDoctorSelect = {
+  id: true, practiceName: true, address: true, city: true, postalCode: true,
+  timezone: true, consultationMinutes: true,
+  specialty: { select: { id: true, slug: true, name: true } },
+  user: { select: { firstName: true, lastName: true, avatarUrl: true } },
 };
-
-// Un créneau est réservable s'il est libre, futur, et sans rendez-vous confirmé.
-const bookable = (now) => ({
-  status: "AVAILABLE",
-  startsAt: { gt: now },
-  requests: { none: { status: "CONFIRMED" } },
-});
-
-const present = (d, nextAvailableAt = null) => ({
-  id: d.id,
-  firstName: d.user.firstName,
-  lastName: d.user.lastName,
-  specialty: d.specialty,
-  practiceName: d.practiceName,
-  address: d.address,
-  city: d.city,
-  postalCode: d.postalCode,
-  timezone: d.timezone,
-  consultationMinutes: d.consultationMinutes,
-  nextAvailableAt,
-});
+export const uuid = z.uuid();
+const fold = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+const input = z.object({
+  q: z.string().trim().max(100).default(''), city: z.string().trim().max(100).default(''),
+  specialtyId: uuid.optional(), page: z.coerce.number().int().min(1).max(1000).default(1),
+  limit: z.coerce.number().int().min(1).max(50).default(20),
+  availableBefore: z.iso.datetime({ offset: true }).optional(),
+}).strict();
+const escaped = value => `%${fold(value).replace(/[\\%_]/g, '\\$&')}%`;
 
 export async function listSpecialties() {
-  const rows = await prisma.specialty.findMany({
-    select: { slug: true, name: true },
-    orderBy: { name: "asc" },
-  });
-  return { items: rows };
+  return prisma.specialty.findMany({ orderBy: { name: 'asc' } });
 }
-
-// #6 — recherche : texte libre (nom, cabinet), spécialité, ville.
-export async function searchDoctors({ q, specialty, city, page, limit }) {
-  const insensitive = (v) => ({ contains: v, mode: "insensitive" });
-  const where = {
-    ...visible,
-    ...(specialty && { specialty: { slug: specialty } }),
-    ...(city && { city: { equals: city, mode: "insensitive" } }),
-    ...(q && {
-      OR: [
-        { practiceName: insensitive(q) },
-        { user: { firstName: insensitive(q) } },
-        { user: { lastName: insensitive(q) } },
-      ],
-    }),
-  };
-  const [rows, total] = await Promise.all([
-    prisma.doctorProfile.findMany({
-      where,
-      select: doctorSelect,
-      take: limit,
-      skip: (page - 1) * limit,
-      orderBy: [{ user: { lastName: "asc" } }, { id: "asc" }],
-    }),
-    prisma.doctorProfile.count({ where }),
-  ]);
-
-  // Prochain créneau libre de chaque médecin de la page, en une seule requête.
-  const next = rows.length
-    ? await prisma.slot.findMany({
-        where: {
-          doctorId: { in: rows.map((d) => d.id) },
-          ...bookable(new Date()),
-        },
-        select: { doctorId: true, startsAt: true },
-        orderBy: { startsAt: "asc" },
-        distinct: ["doctorId"],
-      })
-    : [];
-  const nextByDoctor = new Map(next.map((s) => [s.doctorId, s.startsAt]));
-  return {
-    items: rows.map((d) => present(d, nextByDoctor.get(d.id) ?? null)),
-    page,
-    limit,
-    total,
-  };
-}
-
-async function findVisibleDoctor(id) {
-  const doctor = await prisma.doctorProfile.findFirst({
-    where: { id, ...visible },
-    select: doctorSelect,
-  });
-  if (!doctor)
-    throw new HttpError(404, "DOCTOR_NOT_FOUND", "Ce médecin est introuvable.");
+export async function doctorDetail(id) {
+  const doctor = await prisma.doctorProfile.findFirst({ where: { id: uuid.parse(id), published: true, isApproved: true }, select: publicDoctorSelect });
+  if (!doctor) throw new HttpError(404, 'DOCTOR_NOT_FOUND', 'Ce médecin n’est pas disponible.');
   return doctor;
 }
-
-// #6 — profil d'un médecin.
-export async function getDoctor(id) {
-  const doctor = await findVisibleDoctor(id);
-  const next = await prisma.slot.findFirst({
-    where: { doctorId: id, ...bookable(new Date()) },
-    orderBy: { startsAt: "asc" },
-    select: { startsAt: true },
-  });
-  return present(doctor, next?.startsAt ?? null);
-}
-
-// #6 — créneaux libres d'un médecin sur une période (dates dans SON fuseau).
-export async function listDoctorSlots(id, parseRange) {
-  const doctor = await findVisibleDoctor(id);
-  const { from, to } = parseRange(doctor.timezone);
-  const now = new Date();
-  const start = dayBoundsFor(from, doctor.timezone).start;
-  const end = dayBoundsFor(to, doctor.timezone).end;
-  const slots = await prisma.slot.findMany({
-    where: {
-      doctorId: id,
-      ...bookable(now),
-      startsAt: { gt: now, gte: start, lt: end },
-    },
-    select: { id: true, startsAt: true, endsAt: true },
-    orderBy: { startsAt: "asc" },
-    take: 1000,
-  });
-  return {
-    doctorId: id,
-    timezone: doctor.timezone,
-    consultationMinutes: doctor.consultationMinutes,
-    from,
-    to,
-    slots,
-  };
+export async function searchDoctors(query) {
+  const { q, city, specialtyId, page, limit, availableBefore } = input.parse(query);
+  const where = Prisma.sql`d."published" = true AND d."isApproved" = true
+    AND lower(regexp_replace(normalize(concat_ws(' ', u."firstName", u."lastName", s."name", d."practiceName"), NFD), '[̀-ͯ]', '', 'g')) LIKE ${escaped(q)}
+    AND lower(regexp_replace(normalize(d."city", NFD), '[̀-ͯ]', '', 'g')) LIKE ${escaped(city)}
+    ${specialtyId ? Prisma.sql`AND d."specialtyId" = ${specialtyId}::uuid` : Prisma.empty}
+    ${availableBefore ? Prisma.sql`AND EXISTS (SELECT 1 FROM "Slot" sl WHERE sl."doctorId" = d.id AND sl.status = 'available' AND sl."startsAt" > ${new Date()} AND sl."startsAt" <= ${new Date(availableBefore)} AND NOT EXISTS (SELECT 1 FROM "AppointmentRequest" ar WHERE ar."slotId" = sl.id AND ar.status = 'confirmed'))` : Prisma.empty}`;
+  const from = Prisma.sql`FROM "DoctorProfile" d JOIN "User" u ON u.id = d."userId" JOIN "Specialty" s ON s.id = d."specialtyId" WHERE ${where}`;
+  const [ids, counts] = await Promise.all([
+    prisma.$queryRaw(Prisma.sql`SELECT d.id ${from} ORDER BY u."lastName", u."firstName", d.id LIMIT ${limit} OFFSET ${(page - 1) * limit}`),
+    prisma.$queryRaw(Prisma.sql`SELECT count(*)::int AS total ${from}`),
+  ]);
+  const doctors = await prisma.doctorProfile.findMany({ where: { id: { in: ids.map(row => row.id) } }, select: {
+    ...publicDoctorSelect, slots: { where: { status: 'AVAILABLE', startsAt: { gt: new Date() }, requests: { none: { status: 'CONFIRMED' } } }, orderBy: { startsAt: 'asc' }, take: 1, select: { id: true, startsAt: true, endsAt: true } },
+  } });
+  const byId = new Map(doctors.map(({ slots, ...doctor }) => [doctor.id, { ...doctor, nextAvailableSlot: slots[0] ?? null }]));
+  return { doctors: ids.map(row => byId.get(row.id)), pagination: { page, limit, total: counts[0].total } };
 }
