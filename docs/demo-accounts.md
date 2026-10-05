@@ -2,7 +2,7 @@
 
 Connexion par code email, sans mot de passe. Entrer une adresse ci-dessous dans le frontend, demander un code, puis ouvrir sa boîte sur https://yopmail.com pour lire l’OTP. Boîtes publiques : données fictives uniquement.
 
-**Envoi OTP actuellement bloqué** : aucun domaine Resend validé ; l’expéditeur onboarding@resend.dev est limité à l’adresse du compte Resend. Les comptes sont déjà en base mais la connexion nécessite de configurer un expéditeur sur un domaine validé.
+**Envoi OTP** : en local, configurer Gmail SMTP comme indiqué dans le README. Sur Render gratuit, Resend reste limité à l'adresse du compte tant qu'aucun domaine d'envoi n'est validé. Le frontend doit pointer vers l'API locale pour utiliser Gmail.
 
 Âges au 3 octobre 2026. Tous les médecins ci-dessous sont approuvés et ont les modes patient et médecin.
 
