@@ -1,71 +1,10 @@
-import { HttpError } from "../middlewares/errors.js";
-import { asyncHandler } from "../lib/asyncHandler.js";
-import { parseListQuery, parseReason, requireUuid } from "../lib/validation.js";
-import * as appointments from "../services/appointment.service.js";
-import * as decisions from "../services/decision.service.js";
-import * as dashboard from "../services/dashboard.service.js";
-
-const body = (req) => {
-  if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
-    throw new HttpError(
-      400,
-      "VALIDATION_ERROR",
-      "Le corps de la requête doit être un objet JSON.",
-    );
-  }
-  return req.body;
-};
-
-// #9
-export const create = asyncHandler(async (req, res) => {
-  const { slotId, reason } = body(req);
-  const data = await appointments.createRequest(req.auth.userId, {
-    slotId: requireUuid(slotId, "slotId"),
-    reason: parseReason(reason),
-  });
-  res.status(201).json({ data });
-});
-export const listMine = asyncHandler(async (req, res) => {
-  res.json({
-    data: await appointments.listPatientRequests(
-      req.auth.userId,
-      parseListQuery(req.query),
-    ),
-  });
-});
-export const cancel = asyncHandler(async (req, res) => {
-  res.json({
-    data: await appointments.cancelRequest(
-      req.auth.userId,
-      requireUuid(req.params.id, "id"),
-    ),
-  });
-});
-
-// #10
-export const listForDoctor = asyncHandler(async (req, res) => {
-  res.json({
-    data: await decisions.listDoctorRequests(
-      req.auth.userId,
-      parseListQuery(req.query),
-    ),
-  });
-});
-export const decide = (decision) =>
-  asyncHandler(async (req, res) => {
-    res.json({
-      data: await decisions.decideRequest(
-        req.auth.userId,
-        requireUuid(req.params.id, "id"),
-        decision,
-      ),
-    });
-  });
-
-// #11
-export const patientDashboard = asyncHandler(async (req, res) => {
-  res.json({ data: await dashboard.patientDashboard(req.auth.userId) });
-});
-export const doctorDashboard = asyncHandler(async (req, res) => {
-  res.json({ data: await dashboard.doctorDashboard(req.auth.userId) });
-});
+import { cancelRequest, listAppointments } from '../services/appointment.service.js';
+import { decideAppointment } from '../services/doctor-decision.service.js';
+import { dashboard } from '../services/dashboard.service.js';
+const legacyList = result => ({ items: result.appointments, ...result.pagination });
+export async function listMine(req, res) { res.json({ data: legacyList(await listAppointments({ patientId: req.auth.userId }, req.query)) }); }
+export async function listForDoctor(req, res) { res.json({ data: legacyList(await listAppointments({ slot: { doctorId: req.auth.doctorId } }, req.query)) }); }
+export async function cancel(req, res) { res.json({ appointment: await cancelRequest(req.auth.userId, req.params.id) }); }
+export const decide = choice => async (req, res) => { res.json({ data: await decideAppointment(req.auth.doctorId, req.params.id, choice === 'confirm', req.body) }); };
+export async function patientDashboard(req, res) { res.json({ data: await dashboard(req.auth, { mode: 'patient' }) }); }
+export async function doctorDashboard(req, res) { res.json({ data: await dashboard(req.auth, { mode: 'doctor' }) }); }

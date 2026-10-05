@@ -77,6 +77,8 @@ Ne jamais ajouter de secrets ou de données de patients réels. Les fichiers `.e
 
 ## Connexion et profils
 
+Le contrat de recherche, planning et rendez-vous est dans [docs/booking-api.md](docs/booking-api.md). Les créneaux sont générés sur huit semaines ; une demande reste en attente jusqu'à la décision du médecin.
+
 Renseigner `SESSION_SECRET` (aléatoire, au moins 32 caractères), `EMAIL_API_KEY` (Resend) et `EMAIL_FROM` (expéditeur autorisé). Pour Google, créer un client OAuth Web, autoriser les origines du frontend et partager son client ID entre le frontend et `GOOGLE_CLIENT_ID` de l'API. Aucune clé secrète Google n'est nécessaire pour la vérification du jeton. Sans ces paramètres, la fonctionnalité concernée répond 503 ; `/health` et `/ready` restent disponibles.
 
 Le parcours Google utilise le popup de Google Identity Services, puis envoie `credential` en JSON à l'API. Il ne nécessite pas de callback ni d'URI de redirection backend. Autoriser les origines locales `http://localhost`, `http://localhost:5173` et `http://localhost:3000`, puis l'origine exacte du frontend déployé. Avec `MediTime <onboarding@resend.dev>`, Resend permet uniquement la démonstration vers l'adresse du compte ; valider un domaine et changer `EMAIL_FROM` pour les autres utilisateurs.
