@@ -116,6 +116,7 @@ model WeeklyAvailability {
   doctor      DoctorProfile @relation(fields: [doctorId], references: [id], onDelete: Cascade)
 
   @@unique([doctorId, weekday, startMinute])
+  @@index([doctorId, weekday, startMinute, endMinute])
 }
 
 model AvailabilityException {
