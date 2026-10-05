@@ -24,7 +24,7 @@ npm run dev
 
 API locale : `http://localhost:3001`. `GET /health` vérifie le serveur ; `GET /ready` vérifie aussi PostgreSQL. Les futures routes sont sous `/api/v1`.
 
-Le seed [Persona](prisma/fixtures/README.md) fournit 24 patients congolais répartis entre enfants, adolescents, adultes et seniors, 12 médecins avec portraits, 120 créneaux et 48 demandes fictives. Il conserve les comptes déjà présents. Les [comptes de démonstration](docs/demo-accounts.md) utilisent Yopmail pour récupérer les OTP ; leur envoi nécessite un domaine validé dans Resend. Exécuter les migrations avant le seed : `User.birthDate` conserve les dates de naissance, sans modifier les profils existants.
+Le seed [Persona](prisma/fixtures/README.md) fournit 24 patients congolais répartis entre enfants, adolescents, adultes et seniors, 12 médecins avec portraits, 120 créneaux et 48 demandes fictives. Il conserve les comptes déjà présents. Les [comptes de démonstration](docs/demo-accounts.md) utilisent Yopmail pour récupérer les OTP ; leur envoi nécessite Gmail SMTP en local ou un domaine validé dans Resend. Exécuter les migrations avant le seed : `User.birthDate` conserve les dates de naissance, sans modifier les profils existants.
 
 `DATABASE_URL` utilise le host Neon avec `-pooler` ; `DIRECT_DATABASE_URL` utilise le host direct pour les migrations. Copier les URL depuis Neon avec leurs paramètres SSL. `FRONTEND_ORIGINS` contient les origines frontend autorisées, séparées par des virgules. Ne jamais utiliser la base de production en local.
 
@@ -79,6 +79,8 @@ Ne jamais ajouter de secrets ou de données de patients réels. Les fichiers `.e
 
 ## Connexion et profils
 
+Pour envoyer les OTP avec Gmail en local, renseigner `EMAIL_PROVIDER=gmail`, `GMAIL_USER` (adresse Gmail) et `GMAIL_APP_PASSWORD` (mot de passe d'application à 16 caractères) dans `.env`, puis relancer `npm run dev`. L'expéditeur est ce compte Gmail ; les endpoints restent identiques. Si le frontend local pointe vers Render, configurer `VITE_API_URL=http://localhost:3001/api/v1` dans son fichier `.env.local`, puis relancer Vite. Adapter le port si nécessaire. Render gratuit bloque les ports SMTP : y conserver `EMAIL_PROVIDER=resend` (valeur par défaut). Ne jamais versionner le mot de passe.
+
 Le contrat de recherche, planning et rendez-vous est dans [docs/booking-api.md](docs/booking-api.md). Les créneaux sont générés sur huit semaines ; une demande reste en attente jusqu'à la décision du médecin.
 
 Renseigner `SESSION_SECRET` (aléatoire, au moins 32 caractères), `EMAIL_API_KEY` (Resend) et `EMAIL_FROM` (expéditeur autorisé). Pour Google, créer un client OAuth Web, autoriser les origines du frontend et partager son client ID entre le frontend et `GOOGLE_CLIENT_ID` de l'API. Aucune clé secrète Google n'est nécessaire pour la vérification du jeton. Sans ces paramètres, la fonctionnalité concernée répond 503 ; `/health` et `/ready` restent disponibles.
@@ -95,4 +97,4 @@ L'habilitation médecin est interne, dans la base configurée :
 npm run doctor:approve -- --email "medecin@example.test" --specialty "medecine-generale" --practice "Cabinet Démo" --address "Adresse fictive" --city "Brazzaville"
 ```
 
-Le compte doit déjà exister avec son profil complété. En production, les cookies sont `Secure`, `HttpOnly`, `SameSite=None` par défaut ; en local `SameSite=Lax`. Certains navigateurs bloquent les cookies tiers : vérifier les domaines réels lors de #12 et privilégier des domaines frontend/API du même site. Le seed ne permet pas une connexion : ses adresses fictives ne reçoivent pas d'email.
+Le compte doit déjà exister avec son profil complété. En production, les cookies sont `Secure`, `HttpOnly`, `SameSite=None` par défaut ; en local `SameSite=Lax`. Certains navigateurs bloquent les cookies tiers : vérifier les domaines réels lors de #12 et privilégier des domaines frontend/API du même site. Les comptes du seed nécessitent eux aussi un OTP reçu via le fournisseur email configuré.
